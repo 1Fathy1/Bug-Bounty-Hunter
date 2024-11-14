@@ -122,6 +122,18 @@ Modern applications often have input sanitization and Web Application Firewalls 
 
 #### Tips to Bypass WAFs:
 
+
+
+
+
+
+
+
+
+
+
+
+
 -   Unicode Encoding:
 
 HTML
