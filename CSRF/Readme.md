@@ -62,7 +62,8 @@ token, sometimes all you need to do to bypass a referer check is to not send a r
 
 6. Some idea from writ-up 
    
-
+	1. If the code doesn't work for you, try removing the `>` sign at the end of the tag.
+Honestly, I don't know why, but you can read about it [here](https://bhupendra1238.medium.com/how-i-got-my-first-bounty-hof-from-google-csrf-lead-to-account-delete-85f9906ba9ec).
 
 
  
