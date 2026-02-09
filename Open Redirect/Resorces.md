@@ -49,4 +49,3 @@ Here’s a **clickable list** you can also use:
 
 ---
 
-If you want, I can also generate **descriptions for each link** so your notes have context! 👌😎
