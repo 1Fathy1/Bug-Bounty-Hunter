@@ -1,0 +1,103 @@
+/*
+DOM-Based Open Redirect Sinks
+=============================
+
+Any JavaScript sink that controls navigation, URL handling,
+or routing can lead to DOM-based open redirect vulnerabilities
+when combined with user-controlled input.
+*/
+
+/* Location & Navigation Objects */
+window.location
+document.location
+self.location
+top.location
+parent.location
+
+/* Location Properties */
+location
+location.host
+location.hostname
+location.href
+location.pathname
+location.search
+location.protocol
+
+/* Location Methods */
+location.assign()
+location.replace()
+
+/* Direct Assignment Variants */
+location = userInput
+location.href = userInput
+document.location = userInput
+
+/* Window / Tab Control */
+window.open()
+open()
+
+/* History API */
+history.pushState()
+history.replaceState()
+
+/* DOM Element Navigation Sinks */
+HTMLAnchorElement.href
+HTMLFormElement.action
+HTMLIFrameElement.src
+HTMLIFrameElement.srcdoc
+HTMLObjectElement.data
+HTMLEmbedElement.src
+HTMLAreaElement.href
+frame.src
+iframe.src
+iframe.srcdoc
+
+/* Meta Refresh Redirect */
+<meta http-equiv="refresh" content="0;url=...">
+
+/* Network Request Sinks */
+fetch()
+axios()
+superagent()
+XMLHttpRequest.open()
+XMLHttpRequest.send()
+XMLHttpRequest.responseURL
+
+/* jQuery */
+$.ajax()
+jQuery.ajax()
+$(location).attr('href', userInput)
+$(window).attr('location', userInput)
+
+/* Angular */
+$location.url()
+$location.path()
+$window.location.href
+$window.open()
+
+/* React */
+window.location.href = ...
+window.location.assign(...)
+navigate(userInput)
+history.push(userInput)
+
+/* Vue */
+this.$router.push(userInput)
+this.$router.replace(userInput)
+window.location
+
+/* URL Parsing & Handling */
+URL()
+URLSearchParams()
+decodeURI()
+decodeURIComponent()
+
+/* Document Base URL */
+document.baseURI
+<base href="...">
+
+/* Advanced / Less Obvious */
+postMessage() -> location assignment
+eval() with redirect logic
+setTimeout("location=...")
+setInterval("location=...")
