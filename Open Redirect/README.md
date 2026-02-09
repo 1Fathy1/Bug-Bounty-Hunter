@@ -1,12 +1,9 @@
-\## Open Redirect 
-
-
+## Open Redirect 
 
 An open redirect vulnerability occurs when a web application improperly incorporates user-controlled input into a URL redirection mechanism. This allows attackers to craft malicious URLs that redirect users to arbitrary external domains. Such vulnerabilities are often exploited for phishing attacks, as they leverage the credibility of the legitimate application's URL, SSL certificate, and domain.
 
 
-
-\### Example 
+### Example 
 
 For example, an attacker could create a URL like
 
@@ -15,8 +12,7 @@ For example, an attacker could create a URL like
 &nbsp;When a user clicks this link, they are redirected to the attacker's domain, potentially exposing them to phishing or other malicious activities.
 
 
-
-\### Code Example 
+### Code Example 
 
 ```
 
@@ -64,7 +60,7 @@ this code can make direct for any web site because no filter or validation ok th
 
 ---
 
-\# How Hunting for Open Redirect
+# How Hunting for Open Redirect
 
 
 
@@ -76,29 +72,28 @@ Find \*\*Open Redirect\*\* vulnerabilities efficiently using automation and smar
 
 
 
-\## Collect URLs with Redirect Parameters
+## Collect URLs with Redirect Parameters
+
+
+**Idea:** Target URLs that likely perform redirects.
 
 
 
-\*\*Idea:\*\* Target URLs that likely perform redirects.
+**Tools:**
 
 
 
-\*\*Tools:\*\*
+* Burp Suite / OWASP ZAP (Spider)
+
+* ParamSpider
+
+* Waybackurls
+
+* grep
 
 
 
-\* Burp Suite / OWASP ZAP (Spider)
-
-\* ParamSpider
-
-\* Waybackurls
-
-\* grep
-
-
-
-\*\*Common parameters:\*\*
+**Common parameters:**
 
 
 
@@ -114,7 +109,7 @@ redirect, url, next, target, dest, goto, callback, return, continue
 
 
 
-\##  Basic Redirect Testing
+##  Basic Redirect Testing
 
 
 
@@ -122,7 +117,7 @@ Replace the parameter value with an external domain.
 
 
 
-\*\*Example:\*\*
+**Example:**
 
 
 
@@ -140,7 +135,7 @@ Replace the parameter value with an external domain.
 
 
 
-\*\*Extra idea:\*\*
+**Extra idea:**
 
 Test relative paths:
 
@@ -158,16 +153,14 @@ Test relative paths:
 
 
 
-\## Try Alternate Parameter Names
+## Try Alternate Parameter Names
 
 
 
 Developers often use non-standard names.
 
 
-
-\*\*Examples:\*\*
-
+**Examples:**
 
 
 ```
@@ -182,7 +175,7 @@ Developers often use non-standard names.
 
 
 
-\*\*Extra idea:\*\*
+**Extra idea:**
 
 Look for business logic parameters:
 
@@ -202,7 +195,7 @@ Look for business logic parameters:
 
 
 
-\## Encoding Bypasses
+## Encoding Bypasses
 
 
 
@@ -210,7 +203,7 @@ Encoding may bypass validation.
 
 
 
-\*\*Payloads:\*\*
+**Payloads:**
 
 
 
@@ -230,7 +223,7 @@ Mixed: https:%2f%2fevil.com
 
 
 
-\## Protocol-Relative URLs (//)
+## Protocol-Relative URLs (//)
 
 
 
@@ -250,7 +243,7 @@ If `http` or `https` is blocked:
 
 
 
-\*\*Extra idea:\*\*
+**Extra idea:**
 
 
 
@@ -266,7 +259,7 @@ If `http` or `https` is blocked:
 
 
 
-\##  Base64-Encoded Redirects
+##  Base64-Encoded Redirects
 
 
 
@@ -274,7 +267,7 @@ Some apps encode redirect URLs.
 
 
 
-\*\*Example:\*\*
+**Example:**
 
 
 
@@ -300,7 +293,7 @@ Base64(https://evil.com)
 
 
 
-\*\*Extra idea:\*\*
+**Extra idea:**
 
 Try double Base64 encoding.
 
@@ -310,7 +303,7 @@ Try double Base64 encoding.
 
 
 
-\##  Bulk Testing with QSReplace
+##  Bulk Testing with QSReplace
 
 
 
@@ -334,7 +327,7 @@ Any URL that redirects = potential issue.
 
 
 
-\## JavaScript-Based Redirects
+## JavaScript-Based Redirects
 
 
 
@@ -342,7 +335,7 @@ Redirect logic may exist in JS files.
 
 
 
-\*\*Tool:\*\*
+**Tool:**
 
 
 
@@ -354,7 +347,7 @@ LinkFinder
 
 
 
-\*\*Look for:\*\*
+**Look for:**
 
 
 
@@ -374,7 +367,7 @@ location.href
 
 
 
-\## Parameter Fuzzing with FFUF
+## Parameter Fuzzing with FFUF
 
 
 
@@ -390,7 +383,7 @@ ffuf -u https://site/path?FUZZ=https://evil.com -w params.txt
 
 
 
-\*\*Extra idea:\*\*
+**Extra idea:**
 
 Use API or legacy parameter wordlists.
 
@@ -400,7 +393,7 @@ Use API or legacy parameter wordlists.
 
 
 
-\## DOM-Based Redirects
+## DOM-Based Redirects
 
 
 
@@ -408,7 +401,7 @@ Check client-side redirects in DevTools.
 
 
 
-\*\*Keywords:\*\*
+**Keywords:**
 
 
 
@@ -420,7 +413,7 @@ redirect, location, navigate
 
 
 
-\*\*Extra idea:\*\*
+**Extra idea:**
 
 Parameters sourced from:
 
@@ -438,7 +431,7 @@ window.location.search
 
 
 
-\##  Advanced / Edge Case Payloads
+##  Advanced / Edge Case Payloads
 
 
 
@@ -446,7 +439,7 @@ Exploit URL parsing quirks.
 
 
 
-\*\*Examples:\*\*
+**Examples:**
 
 
 
@@ -462,7 +455,7 @@ evil.com\\@google.com
 
 
 
-\*\*Unicode bypasses:\*\*
+**Unicode bypasses:**
 
 
 
@@ -476,7 +469,7 @@ evil.com\\@google.com
 
 
 
-\*\*Parameter pollution:\*\*
+**Parameter pollution:**
 
 
 
@@ -492,7 +485,7 @@ evil.com\\@google.com
 
 
 
-\## Key Takeaway
+## Key Takeaway
 
 
 
@@ -500,33 +493,33 @@ Open Redirects can lead to:
 
 
 
-\* Phishing
+* Phishing
 
-\* OAuth token leakage
+* OAuth token leakage
 
-\* Account takeover (when chained)
+* Account takeover (when chained)
 
-\* Trust abuse
+* Trust abuse
 
 
 
-They’re often \*\*high impact when combined with other bugs\*\*.
+They’re often **high impact when combined with other bugs**.
 
 
 
 ---
 
-\## Open Redirect via URL Parsing Confusion (`//` \& `///`)
+## Open Redirect via URL Parsing Confusion (`//` \& `///`)
 
 
 
-\### Idea
+### Idea
 
 
 
 Some applications perform redirects using user-controlled paths without properly validating how browsers interpret special URL patterns like `//`, `///`, or `////`.
 
-Browsers treat these patterns as \*\*scheme-relative URLs\*\*, which may result in a redirect to an external domain even if no explicit redirect parameter exists.
+Browsers treat these patterns as **scheme-relative URLs**, which may result in a redirect to an external domain even if no explicit redirect parameter exists.
 
 
 
@@ -534,7 +527,7 @@ Browsers treat these patterns as \*\*scheme-relative URLs\*\*, which may result 
 
 
 
-\### Example Payload
+### Example Payload
 
 
 
@@ -546,17 +539,13 @@ www.affirm.com///google.com/?www.affirm.com/?category=interviwe\&page=3
 
 
 
----
+### Technical Explanation
 
 
 
-\### Technical Explanation
+* `www.affirm.com` makes the URL appear trusted.
 
-
-
-\* `www.affirm.com` makes the URL appear trusted.
-
-\* `///google.com` is interpreted by browsers as:
+* `///google.com` is interpreted by browsers as:
 
 
 
@@ -566,9 +555,9 @@ www.affirm.com///google.com/?www.affirm.com/?category=interviwe\&page=3
 
 &nbsp; ```
 
-\* Everything after `?` is treated as a query string and used only for \*\*visual camouflage\*\*.
+* Everything after `?` is treated as a query string and used only for **visual camouflage**.
 
-\* If the backend reflects or redirects to this path directly:
+* If the backend reflects or redirects to this path directly:
 
 
 
@@ -588,41 +577,15 @@ www.affirm.com///google.com/?www.affirm.com/?category=interviwe\&page=3
 
 
 
-\### Why This Works
+### Why This Works
 
 
 
-\* The server treats the input as a \*\*relative path\*\*.
+* The server treats the input as a **relative path**.
 
-\* The browser interprets it as an \*\*absolute external URL\*\*.
+* The browser interprets it as an **absolute external URL**.
 
-\* No validation is performed on scheme-relative URLs.
-
-
-
----
-
-
-
-\### Impact
-
-
-
-\* \*\*Open Redirect\*\* to arbitrary external domains
-
-\* Enables \*\*phishing attacks\*\* using trusted domains
-
-\* Can be chained with:
-
-
-
-&nbsp; \* OAuth / SSO flows
-
-&nbsp; \* Password reset links
-
-&nbsp; \* Email verification URLs
-
-\* May lead to \*\*token leakage\*\* or \*\*account takeover\*\* when combined with other vulnerabilities
+* No validation is performed on scheme-relative URLs.
 
 
 
@@ -630,11 +593,37 @@ www.affirm.com///google.com/?www.affirm.com/?category=interviwe\&page=3
 
 
 
-\## Open Redirect Using `////` (Multiple Slash Bypass)
+### Impact
 
 
 
-\### Idea
+**Open Redirect** to arbitrary external domains
+
+* Enables **phishing attacks** using trusted domains
+
+* Can be chained with:
+
+
+
+&nbsp; * OAuth / SSO flows
+
+&nbsp; * Password reset links
+
+&nbsp; * Email verification URLs
+
+* May lead to **token leakage** or **account takeover** when combined with other vulnerabilities
+
+
+
+---
+
+
+
+## Open Redirect Using `////` (Multiple Slash Bypass)
+
+
+
+### Idea
 
 
 
@@ -646,7 +635,7 @@ Multiple leading slashes can confuse URL parsers and bypass filters that only bl
 
 
 
-\### Example Payload
+### Example Payload
 
 
 
@@ -662,11 +651,11 @@ Multiple leading slashes can confuse URL parsers and bypass filters that only bl
 
 
 
-\### Technical Explanation
+### Technical Explanation
 
 
 
-\* `////bing.com` is normalized by the browser to:
+* `////bing.com` is normalized by the browser to:
 
 
 
@@ -676,25 +665,9 @@ Multiple leading slashes can confuse URL parsers and bypass filters that only bl
 
 &nbsp; ```
 
-\* Some backends incorrectly assume this is a safe internal path.
+* Some backends incorrectly assume this is a safe internal path.
 
-\* When used in redirects, it results in an external navigation.
-
-
-
----
-
-
-
-\### Impact
-
-
-
-\* Silent redirection to attacker-controlled domains
-
-\* High success rate in \*\*email phishing campaigns\*\*
-
-\* Bypasses naive URL allowlists and regex-based filters
+* When used in redirects, it results in an external navigation.
 
 
 
@@ -702,25 +675,32 @@ Multiple leading slashes can confuse URL parsers and bypass filters that only bl
 
 
 
-\## Visual Camouflage via Query String Injection
+### Impact
 
 
 
-\### Idea
+* Silent redirection to attacker-controlled domains
+
+* High success rate in **email phishing campaigns**
+
+* Bypasses naive URL allowlists and regex-based filters
 
 
+
+---
+
+
+
+## Visual Camouflage via Query String Injection
+
+
+### Idea
 
 Attackers add trusted-looking domains inside the query string to make malicious links appear legitimate.
 
-
-
 ---
 
-
-
-\### Example Payload
-
-
+### Example Payload
 
 ```
 
@@ -730,35 +710,17 @@ Attackers add trusted-looking domains inside the query string to make malicious 
 
 
 
----
+
+
+### Technical Explanation
 
 
 
-\### Technical Explanation
+* Query parameters do not affect the redirect target.
 
+* They are used purely for **social engineering** and filter bypass.
 
-
-\* Query parameters do not affect the redirect target.
-
-\* They are used purely for \*\*social engineering\*\* and filter bypass.
-
-\* Security systems and users may incorrectly assume the redirect is internal.
-
-
-
----
-
-
-
-\### Impact
-
-
-
-\* Increased phishing click-through rate
-
-\* Easier bypass of automated URL scanners
-
-\* Reduced user suspicion
+* Security systems and users may incorrectly assume the redirect is internal.
 
 
 
@@ -766,13 +728,29 @@ Attackers add trusted-looking domains inside the query string to make malicious 
 
 
 
-\## Key Takeaway
+### Impact
+
+
+
+* Increased phishing click-through rate
+
+* Easier bypass of automated URL scanners
+
+* Reduced user suspicion
+
+
+
+---
+
+
+
+## Key Takeaway
 
 
 
 Open Redirect vulnerabilities do not always require classic parameters like `redirect` or `next`.
 
-\*\*URL parsing inconsistencies between servers and browsers\*\* can introduce high-impact redirect issues even in seemingly safe endpoints.
+**URL parsing inconsistencies between servers and browsers** can introduce high-impact redirect issues even in seemingly safe endpoints.
 
 
 
@@ -780,11 +758,7 @@ Open Redirect vulnerabilities do not always require classic parameters like `red
 
 
 
----
-
-
-
-\## Don't forget encodding techniqe 
+## Don't forget encodding techniqe 
 
 
 
@@ -792,15 +766,13 @@ You can fillter pybassing by using some encode type
 
 
 
-1\. url encode
+1. url encode
 
-2\. dotes encode
+2. dotes encode
 
-3\. double encode
+3. double encode
 
-4\. full encode
-
-
+4. full encode
 
 ---
 
